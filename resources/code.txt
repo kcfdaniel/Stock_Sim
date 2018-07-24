@@ -1,0 +1,30 @@
+exec python -m PyQt5.uic.pyuic test.ui -o test.py -x
+
+
+pyinstaller -F -w --paths=C:\Python\Python35\Lib\site-packages\PyQt5\Qt\bin --paths=C:\Python\Python35\Lib\site-packages\PyQt5\Qt\plugins -i stock.icns StockSim.py
+
+
+## python 3.6.2
+pyinstaller --windowed --onefile --clean --noconfirm --add-data="transactionUI.ui:." --add-data="stocksUI.ui:." --add-data="stocks.txt:." --add-data="transactions.txt:." --hidden-import="tkinter" --hidden-import="PyQt5.sip" --hidden-import="pandas._libs.tslibs.np_datetime" --hidden-import="pandas._libs.tslibs.nattype" --hidden-import="pandas._libs.skiplist" --osx-bundle-identifier="com.kcfdaniel.StockSim" --icon=stock.icns StockSim.py
+
+
+
+
+
+pyinstaller --windowed --onefile --clean --noconfirm --add-data="transactionUI.ui:transactionUI.ui" --add-data="stocksUI.ui:stocksUI.ui" --add-data="stocks.txt:stocks.txt" --add-data="transactions.txt:transactions.txt" --hidden-import="tkinter" --osx-bundle-identifier="com.kcfdaniel.StockSim" --icon=stock.icns StockSim.py
+
+pyinstaller --clean --noconfirm --windowed --onefile StockSim.spec
+
+codesign --deep -s "Kwok Ching Fung" StockSim.app
+
+find /Applications -d 1 -name "StockSim.app" -exec spctl --assess --verbose {} \;
+
+
+this may work, but this cannot be directly opened, because of security issues at the moment
+
+1. download the file using mac
+2. on a mac, open terminal, type "exec "
+3. drag the downloaded file to terminal
+4. press Enter
+
+then the software should be running

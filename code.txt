@@ -1,0 +1,9 @@
+exec python -m PyQt5.uic.pyuic test.ui -o test.py -x
+
+
+## python 3.6.2  ## solely this line is enough
+pyinstaller --windowed --clean --noconfirm --add-data="transactionUI.ui:." --add-data="stocksUI.ui:." --add-data="stocks.txt:." --add-data="transactions.txt:." --hidden-import="tkinter" --hidden-import="PyQt5.sip" --hidden-import="pandas._libs.tslibs.np_datetime" --hidden-import="pandas._libs.tslibs.nattype" --hidden-import="pandas._libs.skiplist" --osx-bundle-identifier="com.kcfdaniel.StockSim" --icon=stock.icns StockSim.py
+
+
+
+pyinstaller --clean --noconfirm --windowed --onefile stocksWindow.spec
